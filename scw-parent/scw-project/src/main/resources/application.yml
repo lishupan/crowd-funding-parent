@@ -1,0 +1,51 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: scw-project
+  datasource:
+    url: jdbc:mysql://db1:3306/zhongchou?serverTimezone=GMT%2B8
+    username: root
+    password: offcn123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 4  #初始化连接池的连接数量
+      min-idle: 1 #最小空闲连接数
+      max-active: 10 #最大活跃连接数
+      max-wait: 10000 #从连接池获取连接的等待时间
+      filter:
+        stat:
+          enabled: true   #开启druid的拦截，获取状态信息
+        wall:
+          enabled: true  #开启sql防火墙
+        config:
+          enabled: true #开启配置拦截
+      stat-view-servlet:
+        url-pattern: /druid/*  #管理控制台访问地址
+        login-username: admin
+        login-password: admin
+        enabled: true #开启管理控制台
+        allow: 127.0.0.1
+  redis:
+    host: redis1
+    port: 6379
+mybatis:
+  mapper-locations: classpath:com/offcn/project/mapper/*.xml
+  type-aliases-package: com.offcn.project.po
+  config-location: classpath:mybatis/mybatis-config.xml
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+logging:
+  level:
+    com.offcn.project: debug
+  file:
+    path: /log/
+oss:
+  endpoint: http://oss-cn-guangzhou.aliyuncs.com
+  bucketDomain: java0817-001.oss-cn-guangzhou.aliyuncs.com
+  accessKeyId: LTAI4G7okgmM99FHmrxizdRu
+  accessKeySecret: aSHoxLMBjDfS0AGFSeb5nsLmJIYTwf
+  bucketName: java0817-001
